@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import corsOptions from './configs/cors';
 import { PORT } from './configs/constants';
+import logger from './configs/logger';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(helmet());
 app.use(express.json());
 
 app.get('/healthcheck', (req, res) => {
+  logger.info('Healthcheck OK');
   res.send('OK');
 });
 

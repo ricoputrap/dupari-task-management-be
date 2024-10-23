@@ -30,3 +30,10 @@ export enum EnumErrorName {
   CONFLICT = 'ConflictError',
   INTERNAL_SERVER_ERROR = 'InternalServerError'
 }
+
+export enum EnumLogLevel {
+  DEBUG = 'debug',
+  INFO = 'info',
+  WARN = 'warn',
+  ERROR = 'error'
+}

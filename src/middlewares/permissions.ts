@@ -2,6 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import { verifyAccessToken } from '../utils/token';
 import { IPayload } from '../utils/token/index.types';
 import { EnumResource, permissions } from '../configs/permissions';
+import UnauthorizedError from '../errors/UnauthorizedError';
+import { blacklistedAccessTokens } from '../stores';
+import ForbiddenError from '../errors/ForbiddenError';
+import { EnumLogLevel } from '../configs/enums';
+import { errorHandler } from '../utils/http';
 
 const LOG_PREFIX = "[MIDDLEWARES] checkPermission";
 
@@ -23,41 +28,47 @@ export function checkPermission(action: string, resource: EnumResource) {
 
       // header not found
       if (!authHeader) {
-        return res.status(401).json({ message: 'Authorization header not found.' });
+        throw new UnauthorizedError('Authorization header not found.');
       }
 
       const token = authHeader.split(' ')[1];
 
       // token not found
       if (!token) {
-        return res.status(401).json({ message: 'Authorization token not found.' });
+        throw new UnauthorizedError('Authorization token not found.');
+      }
+
+      // check if token is blacklisted
+      if (blacklistedAccessTokens[token]) {
+        throw new UnauthorizedError('Access token is blacklisted.');
       }
 
       const payload = verifyAccessToken(token) as IPayload;
 
       // invalid access token
       if (!payload) {
-        return res.status(401).json({ message: 'Invalid access token.' });
+        // return res.status(401).json({ message: 'Invalid access token.' });
+        throw new UnauthorizedError('Invalid access token.');
       }
-
-      // TODO check if token is blacklisted
 
       // action not exist
       const allowedRoles = permissions[resource][action];
       if (!allowedRoles) {
-        return res.status(403).json({ message: 'Invalid action.' });
+        throw new ForbiddenError('Invalid action.');
+
       }
 
       // role not allowed
       if (!allowedRoles.includes(payload.role)) {
-        return res.status(403).json({ message: 'Access denied. Insufficient permissions.' });
+        throw new ForbiddenError('Access denied. Insufficient permissions.');
       }
 
       // Grant access
       next();
     }
     catch (error: any) {
-      
+      const logPrefix = `${EnumLogLevel.ERROR}  ${LOG_PREFIX}`;
+      errorHandler(error, res, logPrefix);
     }
   };
 }

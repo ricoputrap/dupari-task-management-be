@@ -1,11 +1,11 @@
 import { EnumErrorName } from "../configs/enums";
 
-class BadRequestError extends Error {
+class ConflictError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = EnumErrorName.BAD_REQUEST;
+    this.name = EnumErrorName.CONFLICT;
     Error.captureStackTrace(this, this.constructor);
   }
 }
 
-export default BadRequestError;
+export default ConflictError;

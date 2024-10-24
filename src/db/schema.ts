@@ -5,6 +5,10 @@ export const userTable = pgTable('USER', {
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
+
+  // 1: Member, 2: Owner
+  role: integer('role').notNull().default(1),
+
   createdAt: integer('created_at').notNull().default(Date.now()),
   updatedAt: integer('updated_at')
     .notNull()

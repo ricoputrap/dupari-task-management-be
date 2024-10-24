@@ -7,3 +7,5 @@ export const ALLOWED_HOSTS: string = process.env.ALLOWED_HOSTS || 'http://localh
 export const ACCESS_TOKEN_SECRET: string = process.env.ACCESS_TOKEN_SECRET || '';
 
 export const SENTRY_DSN: string = process.env.SENTRY_DSN || '';
+
+export const DATABASE_URL: string = process.env.DATABASE_URL || '';

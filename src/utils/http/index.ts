@@ -53,6 +53,8 @@ export const errorHandler = (error: any, res: Response, logPrefix: string) => {
     case EnumErrorName.CONFLICT:
       status = EnumHttpStatus.CONFLICT;
       break;
+    case EnumErrorName.INTERNAL_SERVER_ERROR:
+      status = EnumHttpStatus.INTERNAL_SERVER_ERROR;
     default:
       break;
   }

@@ -15,6 +15,27 @@
       "when": 1729779443508,
       "tag": "0001_magenta_amazoness",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1729780260017,
+      "tag": "0002_ambitious_charles_xavier",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1729985023524,
+      "tag": "0003_cheerful_quasimodo",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1729985059547,
+      "tag": "0004_third_wolverine",
+      "breakpoints": true
     }
   ]
 }

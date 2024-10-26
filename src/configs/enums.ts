@@ -18,8 +18,8 @@ export enum EnumHttpStatus {
 }
 
 export enum EnumUserRole {
-  OWNER = 'owner',
-  MEMBER = 'member'
+  OWNER = 'own',
+  MEMBER = 'mbr'
 }
 
 export enum EnumErrorName {

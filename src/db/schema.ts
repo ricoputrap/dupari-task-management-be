@@ -1,4 +1,4 @@
-import { integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
+import { bigint, integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
 
 export const userTable = pgTable('USER', {
   id: serial('id').primaryKey(),
@@ -6,11 +6,11 @@ export const userTable = pgTable('USER', {
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
 
-  // 1: Member, 2: Owner
-  role: integer('role').notNull().default(1),
+  // mbr: Member, own: Owner
+  role: text('role').notNull().default('mbr'),
 
-  createdAt: integer('created_at').notNull().default(Date.now()),
-  updatedAt: integer('updated_at')
+  created_at: bigint({ mode: "number" }).notNull().default(Date.now()),
+  updated_at: bigint({ mode: "number" })
     .notNull()
     .$onUpdate(() => Date.now()),
 });

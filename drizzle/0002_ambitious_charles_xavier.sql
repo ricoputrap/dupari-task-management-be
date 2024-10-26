@@ -1,0 +1,5 @@
+ALTER TABLE "TASK_BOARD" ALTER COLUMN "created_at" SET DEFAULT 1729780260008;--> statement-breakpoint
+ALTER TABLE "TASK" ALTER COLUMN "created_at" SET DEFAULT 1729780260009;--> statement-breakpoint
+ALTER TABLE "USER" ALTER COLUMN "role" SET DATA TYPE text;--> statement-breakpoint
+ALTER TABLE "USER" ALTER COLUMN "role" SET DEFAULT 'mbr';--> statement-breakpoint
+ALTER TABLE "USER" ALTER COLUMN "created_at" SET DEFAULT 1729780260008;

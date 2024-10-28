@@ -3,7 +3,6 @@ import db from "../../db";
 import { InsertUser, userTable } from "../../db/schema";
 import IUser from "../../entities/user.entity";
 import IUserRepository, { INewUser } from "./index.types";
-import { EnumUserRole } from "../../configs/enums";
 
 class UserRepository implements IUserRepository {
   async getUserByEmail(email: string, withPassword = true): Promise<IUser | undefined> {
@@ -12,7 +11,6 @@ class UserRepository implements IUserRepository {
         id: userTable.id,
         name: userTable.name,
         email: userTable.email,
-        role: userTable.role,
         ...(withPassword ? { password: userTable.password } : {}),
       })
       .from(userTable)
@@ -34,12 +32,10 @@ class UserRepository implements IUserRepository {
         id: userTable.id,
         name: userTable.name,
         email: userTable.email,
-        role: userTable.role
       });
 
     return {
-      ...result[0],
-      role: result[0].role as EnumUserRole
+      ...result[0]
     };
   }
 }

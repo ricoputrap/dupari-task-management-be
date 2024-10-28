@@ -28,18 +28,27 @@ export const handleSchemaValidationError = (
   });
 }
 
+interface IValidationResult<T> {
+  success: boolean;
+  data?: T;
+  errors?: ZodIssue[];
+}
+
 export const validateData = <T>(
-  res: Response,
   data: T,
   schema: ZodSchema,
-  logPrefix: string
-): T | undefined => {
+): IValidationResult<T> => {
   const result = schema.safeParse(data);
 
   if (!result.success) {
-    handleSchemaValidationError(res, result.error.issues, logPrefix);
-    return;
+    return {
+      success: false,
+      errors: result.error.issues
+    }
   }
 
-  return result.data;
+  return {
+    success: true,
+    data: result.data
+  }
 }

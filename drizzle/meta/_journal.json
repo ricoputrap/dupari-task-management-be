@@ -36,6 +36,13 @@
       "when": 1729985059547,
       "tag": "0004_third_wolverine",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1730155345305,
+      "tag": "0005_green_rockslide",
+      "breakpoints": true
     }
   ]
 }

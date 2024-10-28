@@ -19,8 +19,7 @@ export const generateAccessToken = (user: Omit<IUser, "password">) => {
     iat: now,
     exp,
     user_id: user.id,
-    email: user.email,
-    role: user.role
+    email: user.email
   };
 
   return jwt.sign(payload, ACCESS_TOKEN_SECRET);

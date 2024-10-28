@@ -17,11 +17,6 @@ export enum EnumHttpStatus {
   INTERNAL_SERVER_ERROR = 500
 }
 
-export enum EnumUserRole {
-  OWNER = 'own',
-  MEMBER = 'mbr'
-}
-
 export enum EnumErrorName {
   BAD_REQUEST = 'BadRequestError',
   UNAUTHORIZED = 'UnauthorizedError',

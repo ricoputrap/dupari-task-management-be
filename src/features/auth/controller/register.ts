@@ -3,6 +3,7 @@ import { handleSchemaValidationError, validateData } from "../../../utils/valida
 import { IUserRegistrationData, userRegistrationSchema } from "../schemas";
 import { errorHandler, sendResponse } from "../../../utils/http";
 import authService from "../services";
+import { EnumHttpStatus } from "../../../configs/enums";
 
 const LOG_PREFIX = '[AUTH] /register';
 
@@ -39,10 +40,10 @@ const register = async (req: Request, res: Response) => {
 
     sendResponse({
       res,
-      status: result.status,
-      success: result.success,
-      message: result.message,
-      data: result.data
+      status: EnumHttpStatus.CREATED,
+      success: true,
+      message: "User registered successfully",
+      data: result
     });
   }
   catch (error: any) {

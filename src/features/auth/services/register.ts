@@ -1,4 +1,3 @@
-import { EnumHttpStatus } from "../../../configs/enums";
 import logger from "../../../configs/logger";
 import ConflictError from "../../../errors/ConflictError";
 import UserRepository from "../../../repositories/user";
@@ -11,11 +10,6 @@ const LOG_PREFIX = '[AuthService] register';
 const userRepository = new UserRepository();
 
 const register = async (userData: IUserRegistrationData): Promise<ICreateUserResult> => {
-  const result: ICreateUserResult = {
-    success: true,
-    status: EnumHttpStatus.CREATED
-  }
-
   // todo: retrieve from redis
   // get the user to check if user already exists
   const withPassword = false;
@@ -36,13 +30,10 @@ const register = async (userData: IUserRegistrationData): Promise<ICreateUserRes
     password: hashedPassword
   });
 
-  result.data = newUser;
-  result.message = "User registered successfully";
-
   const msg = `${LOG_PREFIX}: User registered successfully with email "${userData.email}" and id ${newUser.id}`;
   logger.info(msg);
 
-  return result;
+  return newUser;
 }
 
 export default register;

@@ -1,5 +1,6 @@
 import { EnumHttpStatus } from "../configs/enums";
 
+/** @deprecated delete soon */
 export interface IOperationResult<T> {
   success: boolean;
   status: EnumHttpStatus;

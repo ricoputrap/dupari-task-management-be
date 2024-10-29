@@ -1,6 +1,6 @@
 import ConflictError from "../../../../errors/ConflictError";
 import { IUserRegistrationData } from "../../../../features/auth/schemas";
-import register from "../../../../features/auth/services/register";
+import authService from "../../../../features/auth/services";
 import userRepository from "../../../../repositories/user";
 import { hashPassword } from "../../../../utils/passwordHashing";
 
@@ -31,7 +31,7 @@ describe("AuthService register()", () => {
 
       // test the result
       const conflictError = new ConflictError(`User with email ${mockUserData.email} already exists`);
-      await expect(register(mockUserData)).rejects.toThrow(conflictError);
+      await expect(authService.register(mockUserData)).rejects.toThrow(conflictError);
 
       // test the function call execution
       const withPassword = false;
@@ -63,7 +63,7 @@ describe("AuthService register()", () => {
         });
 
       // test the result
-      const result = await register(mockUserData);
+      const result = await authService.register(mockUserData);
       expect(result).toEqual({
         id: userID,
         name: mockUserData.name,

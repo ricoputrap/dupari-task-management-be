@@ -1,13 +1,12 @@
 import logger from "../../../configs/logger";
 import ConflictError from "../../../errors/ConflictError";
-import UserRepository from "../../../repositories/user";
+import userRepository from "../../../repositories/user";
 import { INewUser } from "../../../repositories/user/index.types";
 import { hashPassword } from "../../../utils/passwordHashing";
 import { IUserRegistrationData } from "../schemas";
 import { ICreateUserResult } from "./index.types";
 
 const LOG_PREFIX = '[AuthService] register';
-const userRepository = new UserRepository();
 
 const register = async (userData: IUserRegistrationData): Promise<ICreateUserResult> => {
   // todo: retrieve from redis
